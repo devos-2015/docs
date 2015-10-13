@@ -17,8 +17,18 @@ docker run -d -h node-3 \
 
 ## Access
 
-As this registry does not provide TLS, you have to configure all Docker deamons in order to access it:
+As this registry does not provide TLS, you have to configure all Docker deamons to
+not refuse the connection.
+
+If you are running Docker as a deamon on a native Linux machine, execute the following steps:
 
 * Edit the file /etc/default/docker so that there is a line that reads:
   `DOCKER_OPTS="--insecure-registry 46.101.193.82:5000"` (or add that to existing DOCKER_OPTS)
 * Restart your Docker daemon: `service docker stop && service docker start`
+
+If you are running boot2docker, the steps to edit the profile would be:
+
+* Run `boot2docker ssh -t sudo vi /var/lib/boot2docker/profile` to open the editor
+* Add the line `DOCKER_OPTS="--insecure-registry 46.101.193.82:5000"` (or add that to existing DOCKER_OPTS)
+* Save the file and exit the SSH connection
+* Back on your VM host (your 'real' Windows/Mac box), run `boot2docker restart`
