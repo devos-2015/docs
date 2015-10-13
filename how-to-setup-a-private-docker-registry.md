@@ -32,3 +32,18 @@ If you are running boot2docker, the steps to edit the profile would be:
 * Add the line `DOCKER_OPTS="--insecure-registry 46.101.193.82:5000"` (or add that to existing DOCKER_OPTS)
 * Save the file and exit the SSH connection
 * Back on your VM host (your 'real' Windows/Mac box), run `boot2docker restart`
+
+## Frontend
+
+This command deploys a web frontend for the registry on node-2:
+
+~~~ sh
+# on node-2
+docker run -d -h node-2 \
+    --name=registry-frontend \
+    --restart=always \
+    -e ENV_DOCKER_REGISTRY_HOST=46.101.193.82 \
+    -e ENV_DOCKER_REGISTRY_PORT=5000 \
+    -p 8060:80 \
+    konradkleine/docker-registry-frontend
+~~~
