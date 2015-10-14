@@ -22,16 +22,18 @@ not refuse the connection.
 
 If you are running Docker as a deamon on a native Linux machine, execute the following steps:
 
-* Edit the file /etc/default/docker so that there is a line that reads:
-  `DOCKER_OPTS="--insecure-registry 46.101.193.82:5000"` (or add that to existing DOCKER_OPTS)
+* Add the following line to the file /etc/default/docker:
+  `DOCKER_OPTS="$DOCKER_OPTS --insecure-registry 46.101.193.82:5000"`
 * Restart your Docker daemon: `service docker stop && service docker start`
 
-If you are running boot2docker, the steps to edit the profile would be:
+__NOTE:__ If you are running boot2docker, the steps to edit the profile would be:
 
 * Run `boot2docker ssh -t sudo vi /var/lib/boot2docker/profile` to open the editor
-* Add the line `DOCKER_OPTS="--insecure-registry 46.101.193.82:5000"` (or add that to existing DOCKER_OPTS)
+* For older versions of boot2docker you have to add the line `DOCKER_OPTS="$DOCKER_OPTS --insecure-registry 46.101.193.82:5000"`
+* For newer versions of boot2docker you have to add the line `EXTRA_ARGS="$EXTRA_ARGS --insecure-registry 46.101.193.82:5000"`
+* If you are not sure, it probably doesn't hurt to add both lines ;-)
 * Save the file and exit the SSH connection
-* Back on your VM host (your 'real' Windows/Mac box), run `boot2docker restart`
+* Back on your VM host (your 'real' Windows/Mac box), run `boot2docker down` and then `boot2docker up`
 
 ## Frontend
 
