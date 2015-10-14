@@ -1,6 +1,10 @@
 # Workshop: Micro Services in der Praxis
 
-## Developer Open Space 2015 Leipzig
+Developer Open Space 2015 Leipzig
+
+## Quicklinks
+
+[Shipyard UI](http://46.101.245.190:8080/) - [Docker registry UI](http://46.101.132.55:8060/) - [Consul UI](http://46.101.245.190:8500/)
 
 ### Our private cloud infrastructure
 
