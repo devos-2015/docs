@@ -22,3 +22,7 @@ To rebuild the complete infrastructure, follow these steps:
 * [Setup Consul](how-to-setup-consul.md)
 * [Setup Registrator](how-to-setup-registrator.md)
 * [Setup a private Docker registry](how-to-setup-a-private-docker-registry.md)
+
+### Tips and tricks ...
+
+* [Boot2docker tricks and hard to find information](tips-and-tricks-boot2docker.md)
