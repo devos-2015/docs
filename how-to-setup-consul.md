@@ -11,7 +11,7 @@ unhealthy hosts and enables services to easily provide circuit breakers.
 
 ~~~ sh
 # on node-1
-docker run -d -h node-1 -v /mnt:/data \
+docker run -d -h node-1 -v /data/consul/data:/data \
     --name consul-server \
     --restart=always \
     -p 46.101.245.190:8300:8300 \
@@ -22,10 +22,11 @@ docker run -d -h node-1 -v /mnt:/data \
     -p 46.101.245.190:8400:8400 \
     -p 46.101.245.190:8500:8500 \
     -p 172.17.42.1:53:53/udp \
-    progrium/consul -server -advertise 46.101.245.190 -bootstrap-expect 3
+    -e SERVICE_IGNORE=true \
+    46.101.193.82:5000/consul-cors:latest -server -advertise 46.101.245.190 -bootstrap-expect 3
 
 # on node-2
-docker run -d -h node-2 -v /mnt:/data  \
+docker run -d -h node-2 -v /data/consul/data:/data  \
     --name consul-server \
     --restart=always \
     -p 46.101.132.55:8300:8300 \
@@ -36,10 +37,11 @@ docker run -d -h node-2 -v /mnt:/data  \
     -p 46.101.132.55:8400:8400 \
     -p 46.101.132.55:8500:8500 \
     -p 172.17.42.1:53:53/udp \
-    progrium/consul -server -advertise 46.101.132.55 -join 46.101.245.190
+    -e SERVICE_IGNORE=true \
+    46.101.193.82:5000/consul-cors:latest -server -advertise 46.101.132.55 -join 46.101.245.190
 
 # on node-3
-docker run -d -h node-3 -v /mnt:/data  \
+docker run -d -h node-3 -v /data/consul/data:/data  \
     --name consul-server \
     --restart=always \
     -p 46.101.193.82:8300:8300 \
@@ -50,7 +52,8 @@ docker run -d -h node-3 -v /mnt:/data  \
     -p 46.101.193.82:8400:8400 \
     -p 46.101.193.82:8500:8500 \
     -p 172.17.42.1:53:53/udp \
-    progrium/consul -server -advertise 46.101.193.82 -join 46.101.245.190
+    -e SERVICE_IGNORE=true \
+    46.101.193.82:5000/consul-cors:latest -server -advertise 46.101.193.82 -join 46.101.245.190
 ~~~
 
 You should now be able to access the Consul UI using one of the following URLs:
